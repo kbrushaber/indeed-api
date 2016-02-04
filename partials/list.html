@@ -1,0 +1,50 @@
+<section class="jobpage">
+  <div class="search">
+    <h1>Job Listings</h1>
+    <label>search: </label>
+    <input ng-model="query" placeholder="Search for jobs" autofocus>
+
+    <label class="formgroup">by:
+      <select ng-model="jobOrder">
+        <option value="jobtitle">Title</option>
+        <option value="company">Company</option>
+        <option value="date">Date</option>
+      </select>
+    </label>
+
+    <label class="formgroup">
+      <input type="radio" ng-model="direction" name="direction" checked>
+      ascending
+     </label>
+    <label class="formgroup">
+      <input type="radio" ng-model="direction" name="direction" value="reverse">
+      descending
+    </label>
+<br>
+<br>
+    <a href=search.php>Add More Jobs</a><br>
+   
+  </div>
+  </br>
+  </br>
+  <table border=1>
+  <tr>
+  <td><b>Job Title</b></td>
+  <td><b>Company</b></td>
+  <td><b>Posted Date</b></td>
+  <td><b>Job Key</b></td>
+  <td><b>URL</b></td>
+  </tr>
+    <tr ng-animate="'animate'" class="jobpage" ng-repeat="item in jobs | filter: query | unique: 'jobkey'| orderBy: jobOrder:direction">
+      <td>
+      <a href="#/details/{{jobs.indexOf(item)}}">{{item.jobtitle}}</a>
+      </td>
+      <td>{{item.company}}</td>
+      <td>{{item.date}}</td>
+      <td>{{item.jobkey}}</td>
+      <td><a href={{item.url}} target="_blank">Job URL</a></td>
+
+    </tr>
+  </table>  
+
+</section>
